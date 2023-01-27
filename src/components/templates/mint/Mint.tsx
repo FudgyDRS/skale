@@ -10,12 +10,14 @@ import {
   Heading,
   Box,
   useColorModeValue,
+  Button,
 } from '@chakra-ui/react';
 import { useEvmWalletTransactions } from '@moralisweb3/next';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { getEllipsisTxt } from 'utils/format';
 import { useNetwork } from 'wagmi';
+import MintNFT from './MintNFT';
 
 const Mint = () => {
   const hoverTrColor = useColorModeValue('gray.100', 'gray.700');
@@ -31,8 +33,10 @@ const Mint = () => {
   return (
     <>
       <Heading size="lg" marginBottom={6}>
-        Transactions
+        Mint your very own Sepolia PoP NFT!
       </Heading>
+      <MintNFT />
+      <Button colorScheme="blue">Mint NFT</Button>
       {transactions?.length ? (
         <Box border="2px" borderColor={hoverTrColor} borderRadius="xl" padding="24px 18px">
           <TableContainer w={'full'}>

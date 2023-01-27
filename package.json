@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "homepage": "https://eth-boilerplate.vercel.app/",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

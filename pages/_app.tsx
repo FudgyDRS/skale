@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { createClient, WagmiConfig } from 'wagmi';
+import { createClient, WagmiConfig, useContract } from 'wagmi';
 import { configureChains } from '@wagmi/core';
 import {
   arbitrum,
@@ -24,15 +24,19 @@ import { publicProvider } from 'wagmi/providers/public';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 
-import { alchemyProvider } from 'wagmi/providers/alchemy'
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
+import { InjectedConnector } from 'wagmi/connectors/injected';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
-//import { providers } from 'ethers'
+import gameABI from 'constants/ABI/MainGame.json';
+import nftABI from 'constants/ABI/MainNFT.json';
+import tokenABI from 'constants/ABI/MainToken.json';
 
-//const myProvider = ({ chainId }) => new providers.AlchemyProvider(chainId, process.env.ALCHEMY_KEY);
+const gameAddress = '0x37b8A7615eDd512c329468A2932083807337a163';
+const nftAddress = '0x77eFB7ed59Ca1e35dacA17bAaC473A70fb6E8e54';
+const tokenAddress = '0x76c57C952831F450C75fd28DC464B9b8D563fFE4';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -53,7 +57,7 @@ const { chains, provider, webSocketProvider } = configureChains(
     polygonMumbai,
     sepolia,
   ],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_KEY ? process.env.ALCHEMY_KEY:"" }), publicProvider()],
+  [alchemyProvider({ apiKey: process.env.ALCHEMY_KEY ? process.env.ALCHEMY_KEY : '' }), publicProvider()],
 );
 
 // const client = createClient({
@@ -88,7 +92,7 @@ const client = createClient({
   ],
   provider,
   webSocketProvider,
-})
+});
 
 const config = {
   initialColorMode: 'dark',
@@ -98,7 +102,11 @@ const config = {
 const theme = extendTheme({ config });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  console.log(process.env.ALCHEMY_KEY)
+  /* const gameContract = useContract({
+    addressOrName: '0x37b8A7615eDd512c329468A2932083807337a163',
+    contractInterface: gameABI,
+  }) */
+  // console.log(process.env.ALCHEMY_KEY)
   return (
     <ChakraProvider resetCSS theme={theme}>
       <WagmiConfig client={client}>
