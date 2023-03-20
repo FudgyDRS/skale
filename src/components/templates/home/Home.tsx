@@ -27,7 +27,7 @@ async function upload(event: any, specificDirectory=''){
 
   //provide your account & private key
   //note this must include the 0x prefix
-  let privateKey = '0x' + 'fd9073c0cbe98f2ad6a166c6649d1304f35a186b86d92937800382d3e8b38a17';
+  let privateKey = '0x' + '';
   let account = "0x1fDFc53Ac8e31c4DEe0940E73ddAA72652aFd9bf";
 
   //get file data from file upload input field
